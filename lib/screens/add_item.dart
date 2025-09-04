@@ -86,7 +86,7 @@ class AddItemDialogState extends ConsumerState<AddItemDialog> {
                 TextFormField(
                   controller: _nameController,
                   autovalidateMode: AutovalidateMode.onUserInteraction,
-                  style: Theme.of(context).textTheme.labelSmall,
+                  style: Theme.of(context).textTheme.bodySmall,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Please enter name';
@@ -108,7 +108,7 @@ class AddItemDialogState extends ConsumerState<AddItemDialog> {
                   autovalidateMode: AutovalidateMode.onUserInteraction,
                   value: selectedCategory,
                   isDense: true,
-                  style: const TextStyle(fontSize: 12, color: Colors.black),
+                  style: Theme.of(context).textTheme.bodySmall,
                   validator: (value) =>
                       value == null ? 'Please select a category' : null,
                   decoration: const InputDecoration(
@@ -135,24 +135,26 @@ class AddItemDialogState extends ConsumerState<AddItemDialog> {
                   },
                 ),
                 const SizedBox(height: 6),
-                const Text('Description',
-                    style: TextStyle(color: Colors.black, fontSize: 10)),
+                Text('Description',
+                    style: Theme.of(context).textTheme.labelSmall),
                 const SizedBox(height: 4),
                 TextField(
                   controller: _descriptionController,
-                  style: const TextStyle(fontSize: 12, color: Colors.black),
+                  style: Theme.of(context).textTheme.bodySmall,
                   maxLines: 3,
                   decoration: const InputDecoration(
                     label: Text('Enter item description (optional)'),
                   ),
                 ),
                 const SizedBox(height: 6),
-                const Text('Status',
-                    style: TextStyle(color: Colors.black, fontSize: 10)),
+                Text(
+                  'Status',
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
                 const SizedBox(height: 4),
                 DropdownButtonFormField<String>(
                   isDense: true,
-                  style: const TextStyle(fontSize: 12, color: Colors.black),
+                  style: Theme.of(context).textTheme.bodySmall,
                   value: selectedStatus,
                   decoration: const InputDecoration(
                     labelText: 'Select Status',
@@ -217,10 +219,15 @@ class LabelAsterisk extends StatelessWidget {
     return RichText(
       text: TextSpan(children: [
         TextSpan(
-            text: '$label ',
-            style: const TextStyle(color: Colors.black, fontSize: 10)),
-        const TextSpan(
-            text: '*', style: TextStyle(color: Colors.red, fontSize: 10)),
+          text: '$label ',
+          style: Theme.of(context).textTheme.labelSmall,
+        ),
+        TextSpan(
+            text: '*',
+            style: Theme.of(context)
+                .textTheme
+                .labelSmall
+                ?.copyWith(color: Colors.red)),
       ]),
     );
   }

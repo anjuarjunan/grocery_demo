@@ -4,7 +4,7 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     brightness: Brightness.light,
     useMaterial3: true,
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: Colors.transparent,
     primaryColor: Colors.deepPurple,
     colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.deepPurple,
@@ -12,6 +12,7 @@ class AppTheme {
     ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
+      surfaceTintColor: Colors.white,
       elevation: 1,
       titleTextStyle: TextStyle(
         fontSize: 16,
@@ -22,8 +23,8 @@ class AppTheme {
     ),
     textTheme: const TextTheme(
       titleLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      bodyMedium: TextStyle(fontSize: 14, color: Colors.black87),
-      labelSmall: TextStyle(fontSize: 12, color: Colors.grey),
+      bodyMedium: TextStyle(fontSize: 12, color: Colors.black87),
+      labelSmall: TextStyle(fontSize: 10, color: Colors.black87),
     ),
     inputDecorationTheme: const InputDecorationTheme(
       isDense: true,

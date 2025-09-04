@@ -14,7 +14,6 @@ class GroceryList extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
           title: Align(
             alignment: Alignment.centerLeft,
             child: Text(
