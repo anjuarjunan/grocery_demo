@@ -40,7 +40,15 @@ class AddItemDialogState extends ConsumerState<AddItemDialog> {
       ref
           .read(groceryListNotifierProvider.notifier)
           .addItem(newItem); //access provider using notifier
-
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Item added successfully!'),
+          duration: Duration(seconds: 1),
+          backgroundColor: Colors.deepPurple,
+          behavior:
+              SnackBarBehavior.floating, // Optional: makes it float above UI
+        ),
+      );
       _nameController.clear();
       _descriptionController.clear();
       selectedCategory = null;

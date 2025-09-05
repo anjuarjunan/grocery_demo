@@ -36,6 +36,7 @@ class CategoryFilter extends ConsumerWidget {
               final isSelected = selected == category;
               return ChoiceChip(
                 side: const BorderSide(width: 1, color: Color(0xff9ca3af)),
+                key: ValueKey(category),
                 label: Text(category),
                 selected: isSelected,
                 onSelected: (_) {

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:grocery_demo/screens/add_item.dart';
 import 'package:grocery_demo/widgets/grocery_item.dart';
 import '../data/provider.dart';
-import 'category_filter.dart';
+import '../widgets/category_filter.dart';
 
 class GroceryList extends ConsumerWidget {
   const GroceryList({super.key});
