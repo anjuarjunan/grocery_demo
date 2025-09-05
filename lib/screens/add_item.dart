@@ -60,152 +60,161 @@ class AddItemDialogState extends ConsumerState<AddItemDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      backgroundColor: Colors.white,
-      surfaceTintColor: Colors.white,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      titlePadding: const EdgeInsets.only(top: 16, left: 16, right: 8),
-      title: Row(
-        children: [
-          IconButton(
-            icon: const Icon(Icons.add_shopping_cart,
-                color: Colors.deepPurple, size: 20),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          Expanded(
-            child: Text(
-              'Add New Item',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ),
-        ],
+    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
+
+    return Container(
+      padding: EdgeInsets.only(
+        bottom: bottomInset,
+        top: 16,
+        left: 16,
+        right: 16,
       ),
-      content: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const LabelAsterisk(label: 'Item Name'),
-                const SizedBox(height: 4),
-                TextFormField(
-                  controller: _nameController,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  style: Theme.of(context).textTheme.bodySmall,
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Please enter name';
-                    }
-                    return null;
-                  },
-                  onChanged: (value) {},
-                  decoration: const InputDecoration(
-                    isDense: true,
-                    label: Text(
-                      'Enter item name',
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: 12),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+            Text('Add New Item', style: Theme.of(context).textTheme.titleLarge),
+            const SizedBox(height: 16),
+            Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const LabelAsterisk(label: 'Item Name'),
+                    const SizedBox(height: 4),
+                    TextFormField(
+                      controller: _nameController,
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      style: Theme.of(context).textTheme.bodySmall,
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Please enter name';
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {},
+                      decoration: const InputDecoration(
+                        isDense: true,
+                        label: Text(
+                          'Enter item name',
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                const LabelAsterisk(label: 'Category'),
-                const SizedBox(height: 4),
-                DropdownButtonFormField<String>(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  value: selectedCategory,
-                  isDense: true,
-                  style: Theme.of(context).textTheme.bodySmall,
-                  validator: (value) =>
-                      value == null ? 'Please select a category' : null,
-                  decoration: const InputDecoration(
-                    labelText: 'Select Category',
-                  ),
-                  items: category.map((category) {
-                    return DropdownMenuItem(
-                      value: category,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Text(
-                          category,
-                          style: const TextStyle(
-                            fontSize: 12,
-                          ),
-                        ),
+                    const SizedBox(height: 6),
+                    const LabelAsterisk(label: 'Category'),
+                    const SizedBox(height: 4),
+                    DropdownButtonFormField<String>(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      value: selectedCategory,
+                      isDense: true,
+                      style: Theme.of(context).textTheme.bodySmall,
+                      validator: (value) =>
+                          value == null ? 'Please select a category' : null,
+                      decoration: const InputDecoration(
+                        labelText: 'Select Category',
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (String? value) {
-                    setState(() {
-                      selectedCategory = value;
-                    });
-                  },
-                ),
-                const SizedBox(height: 6),
-                Text('Description',
-                    style: Theme.of(context).textTheme.labelSmall),
-                const SizedBox(height: 4),
-                TextField(
-                  controller: _descriptionController,
-                  style: Theme.of(context).textTheme.bodySmall,
-                  maxLines: 3,
-                  decoration: const InputDecoration(
-                    label: Text('Enter item description (optional)'),
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text(
-                  'Status',
-                  style: Theme.of(context).textTheme.labelSmall,
-                ),
-                const SizedBox(height: 4),
-                DropdownButtonFormField<String>(
-                  isDense: true,
-                  style: Theme.of(context).textTheme.bodySmall,
-                  value: selectedStatus,
-                  decoration: const InputDecoration(
-                    labelText: 'Select Status',
-                  ),
-                  items: status.map((status) {
-                    return DropdownMenuItem(
-                      value: status,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 0),
-                        child: Text(
-                          status,
-                          style: const TextStyle(
-                            fontSize: 12,
+                      items: category.map((category) {
+                        return DropdownMenuItem(
+                          value: category,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4),
+                            child: Text(
+                              category,
+                              style: const TextStyle(
+                                fontSize: 12,
+                              ),
+                            ),
                           ),
-                        ),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedCategory = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 6),
+                    Text('Description',
+                        style: Theme.of(context).textTheme.labelSmall),
+                    const SizedBox(height: 4),
+                    TextField(
+                      controller: _descriptionController,
+                      style: Theme.of(context).textTheme.bodySmall,
+                      maxLines: 3,
+                      decoration: const InputDecoration(
+                        label: Text('Enter item description (optional)'),
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (String? value) {
-                    setState(() {
-                      selectedStatus = value;
-                    });
-                  },
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      'Status',
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                    const SizedBox(height: 4),
+                    DropdownButtonFormField<String>(
+                      isDense: true,
+                      style: Theme.of(context).textTheme.bodySmall,
+                      value: selectedStatus,
+                      decoration: const InputDecoration(
+                        labelText: 'Select Status',
+                      ),
+                      items: status.map((status) {
+                        return DropdownMenuItem(
+                          value: status,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 0),
+                            child: Text(
+                              status,
+                              style: const TextStyle(
+                                fontSize: 12,
+                              ),
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? value) {
+                        setState(() {
+                          selectedStatus = value;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                const SizedBox(width: 8),
+                FilledButton(
+                  style: FilledButton.styleFrom(foregroundColor: Colors.white),
+                  onPressed: addItem,
+                  child: const Text('Add item'),
                 ),
               ],
             ),
-          ),
+          ],
         ),
       ),
-      actions: <Widget>[
-        FilledButton(
-            style: FilledButton.styleFrom(
-              foregroundColor: Colors.white,
-            ),
-            onPressed: addItem,
-            child: const Text('Add item')),
-        TextButton(
-          child: const Text('Cancel'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
     );
   }
 

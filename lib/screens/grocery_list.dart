@@ -84,10 +84,14 @@ class GroceryList extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialog<void>(
+          showModalBottomSheet(
+            backgroundColor: Colors.white,
             context: context,
-            barrierDismissible: false,
-            builder: (_) => const AddItemDialog(),
+            isScrollControlled: true,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            ),
+            builder: (context) => const AddItemDialog(),
           );
         },
         tooltip: 'add more',
